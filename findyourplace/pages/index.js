@@ -5,11 +5,24 @@ import List from "../components/List";
 import Map from "../components/Map";
 import PlaceDetail from "../components/PlaceDetail";
 
+const places = [
+  {name: "sample place1"},
+  {name: "sample place2"},
+  {name: "sample place3"},
+  {name: "sample place4"},
+  {name: "sample place5"},
+  {name: "sample place6"},
+]
+
+
 const Home = () => {
+
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
 
   const [coordinates, setCoordinates]=useState({lat:0,lng:0});
   const [type, setType]=useState('restaurantes');
   const [ratings, setRatings]=useState('ratings');
+  const [isLoading, setIsLoading] = useState(false);
   
 
   return (
