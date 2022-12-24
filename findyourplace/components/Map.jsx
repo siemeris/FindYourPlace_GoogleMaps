@@ -5,7 +5,7 @@ import GoogleMapReact from "google-map-react"
 
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-const Map = ({setCoordinates, coordinates}) => {
+const Map = ({setCoordinates, coordinates, setBounds}) => {
     // const defaultProps = {
     //     center: {
     //       lat: 10.99835602,
@@ -35,6 +35,12 @@ const Map = ({setCoordinates, coordinates}) => {
         defaultCenter={coordinates}
         defaultZoom={10}
         center={coordinates}
+        onChange={(e)=>{
+          console.log(e) //Información en un objeto con los límites, coordenadas y zoom del mapa
+          setCoordinates({lat:e.center.lat , lng:e.center.lng})
+          // console.log(coordinates, "coordinates")
+          setBounds({ne : e.marginBounds.ne, nw: e.marginBounds.nw, se : e.marginBounds.se, sw: e.marginBounds.sw})
+        }}
       >
         {/* <AnyReactComponent
           lat={59.955413}

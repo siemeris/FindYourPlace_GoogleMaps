@@ -8,14 +8,11 @@ import { Rating } from 'react-simple-star-rating'
 const Header = ({ setType, setCoordinates, setRatings }) => {
 
     // Para el rating
-
     const [rating, setRating] = useState(0)
-
     // Catch Rating value
     const handleRating = (rate) => {
         setRating(rate)
-
-        // other logic
+    // other logic
     }
     // Optinal callback functions
     const onPointerEnter = () => console.log('Enter')
@@ -96,13 +93,14 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
                                     {/* <Rating name="read-only" value={2} readOnly /> */}
                                    <div style={{display:"flex", alignItems:"center"}} >
                                     <Rating
-                                        onClick={handleRating}
+                                        // onClick={handleRating}
                                         // onPointerEnter={onPointerEnter}
                                         // onPointerLeave={onPointerLeave}
                                         // onPointerMove={onPointerMove}
                                         SVGstyle={{ display: 'inline-block' }}
                                         size={25}
                                         initialValue={2}
+                                        readonly={true}
                                         // style={{display:"flex", marginTop:"50%", backgroundColor:"black"}}
 
                                     /* Available Props */

@@ -18,10 +18,12 @@ const places = [
 
 const Home = () => {
 
+  const [places, setPlaces]=useState([])
   const [filteredPlaces, setFilteredPlaces] = useState([]);
-
+  // Para controlar los límites del mapa cuando se mueve el mapa
+  const [bounds, setBounds] = useState(null)
   const [coordinates, setCoordinates]=useState({});
-  const [type, setType]=useState('restaurantes');
+  const [type, setType]=useState('restaurants');
   const [ratings, setRatings]=useState('ratings');
   const [isLoading, setIsLoading] = useState(false);
   
@@ -39,13 +41,13 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    // setIsLoading(true);
-    getPlacesData().then((data) => {
+    setIsLoading(true);
+    getPlacesData(type, bounds?.ne, bounds?.sw).then((data) => {
       console.log(data);
-      // setPlaces(data);
-      // setIsLoading(false);
+      setPlaces(data);
+      setIsLoading(false);
     });
-  }, []);
+  }, [type, coordinates, bounds]);
 
   return (
     <Flex justifyContent={"center"}
@@ -60,7 +62,7 @@ const Home = () => {
 
       <Header setType={setType} setCoordinates={setCoordinates} setRatings={setRatings} />
       <List places={places} isLoading={isLoading} />
-      <Map setCoordinates={setCoordinates} coordinates={coordinates} />
+      <Map setCoordinates={setCoordinates} coordinates={coordinates} setBounds={setBounds} />
     </Flex>
   )
 }
