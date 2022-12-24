@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import List from "../components/List";
 import Map from "../components/Map";
 import PlaceDetail from "../components/PlaceDetail";
+import { getPlacesData } from "./api/hello";
 
 const places = [
   {name: "sample place1"},
@@ -19,7 +20,7 @@ const Home = () => {
 
   const [filteredPlaces, setFilteredPlaces] = useState([]);
 
-  const [coordinates, setCoordinates]=useState({lat:0,lng:0});
+  const [coordinates, setCoordinates]=useState({});
   const [type, setType]=useState('restaurantes');
   const [ratings, setRatings]=useState('ratings');
   const [isLoading, setIsLoading] = useState(false);
@@ -29,12 +30,21 @@ const Home = () => {
 
     // get the users current location on intial login
 
-    // navigator.geolocation.getCurrentPosition(
-    //   ({ coords: { latitude, longitude } }) => {
-    //     console.log({ latitude, longitude });
-    //     setCoordinates({ lat: latitude, lng: longitude });
-    //   }
-    // );
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        console.log({ latitude, longitude });
+        setCoordinates({ lat: latitude, lng: longitude });
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    // setIsLoading(true);
+    getPlacesData().then((data) => {
+      console.log(data);
+      // setPlaces(data);
+      // setIsLoading(false);
+    });
   }, []);
 
   return (
@@ -50,7 +60,6 @@ const Home = () => {
 
       <Header setType={setType} setCoordinates={setCoordinates} setRatings={setRatings} />
       <List places={places} isLoading={isLoading} />
-      {console.log(isLoading)}
       <Map setCoordinates={setCoordinates} coordinates={coordinates} />
     </Flex>
   )

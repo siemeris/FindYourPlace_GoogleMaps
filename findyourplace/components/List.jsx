@@ -4,7 +4,7 @@ import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import PlaceDetail from './PlaceDetail'
 
 const List = ({places, isLoading}) => {
-  {console.log(isLoading, "LIST")}
+  
   if (isLoading) return (<Flex
     direction={"column"}
     bg={"whiteAlpha.900"}

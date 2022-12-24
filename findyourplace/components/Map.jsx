@@ -34,6 +34,7 @@ const Map = ({setCoordinates, coordinates}) => {
         bootstrapURLKeys={{ key: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk" }}
         defaultCenter={coordinates}
         defaultZoom={10}
+        center={coordinates}
       >
         {/* <AnyReactComponent
           lat={59.955413}
