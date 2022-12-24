@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import List from "../components/List";
 import Map from "../components/Map";
@@ -25,6 +25,18 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   
 
+  useEffect(() => {
+
+    // get the users current location on intial login
+
+    // navigator.geolocation.getCurrentPosition(
+    //   ({ coords: { latitude, longitude } }) => {
+    //     console.log({ latitude, longitude });
+    //     setCoordinates({ lat: latitude, lng: longitude });
+    //   }
+    // );
+  }, []);
+
   return (
     <Flex justifyContent={"center"}
       alignItems={"center"}
@@ -37,7 +49,8 @@ const Home = () => {
     >
 
       <Header setType={setType} setCoordinates={setCoordinates} setRatings={setRatings} />
-      <List />
+      <List places={places} isLoading={isLoading} />
+      {console.log(isLoading)}
       <Map setCoordinates={setCoordinates} coordinates={coordinates} />
     </Flex>
   )
