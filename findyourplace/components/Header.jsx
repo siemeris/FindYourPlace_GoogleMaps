@@ -7,43 +7,49 @@ import { Rating } from 'react-simple-star-rating'
 
 const Header = ({ setType, setCoordinates, setRatings }) => {
 
-    // Para el rating
-    const [rating, setRating] = useState(0)
-    // Catch Rating value
-    const handleRating = (rate) => {
-        setRating(rate)
-    // other logic
-    }
-    // Optinal callback functions
-    const onPointerEnter = () => console.log('Enter')
-    const onPointerLeave = () => console.log('Leave')
-    const onPointerMove = (value, index) => console.log(value, index)
+    // Para el autocomplete
+    const [autocomplete, setAutocomplete] = useState(null);
+    const onLoad = (autoC) => setAutocomplete(autoC);
+    const onPlaceChanged = () => {
+        const lat = autocomplete.getPlace().geometry.location.lat();
+        const lng = autocomplete.getPlace().geometry.location.lng();
+        setCoordinates({ lat, lng });
+    };
 
-
-
+    // // Para el rating
+    // const [rating, setRating] = useState(0)
+    // // Catch Rating value
+    // const handleRating = (rate) => {
+    //     setRating(rate)
+    // // other logic
+    // }
+    // // Optinal callback functions
+    // const onPointerEnter = () => console.log('Enter')
+    // const onPointerLeave = () => console.log('Leave')
+    // const onPointerMove = (value, index) => console.log(value, index)
 
     return (
         <Flex position={"absolute"} top={0} left={0}
             width={"full"} px={4} py={2} zIndex={101}>
 
             <Flex>
-                {/* <Autocomplete> */}
-                <InputGroup width={"35vw"} shadow="lg">
-                    <InputRightElement pointerEvents={"none"}
-                        children={<BiSearch color="gray" fontSize={20} />} />
+                {/* <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}> */}
+                    <InputGroup width={"35vw"} shadow="lg">
+                        <InputRightElement pointerEvents={"none"}
+                            children={<BiSearch color="gray" fontSize={20} />} />
 
-                    <Input
-                        type={"text"}
-                        placeholder="Search Google Map..."
-                        variant={"filled"}
-                        fontSize={18}
-                        bg={"white"}
-                        color={"gray.700"}
-                        _hover={{ bg: 'whiteAlpha.800' }}
-                        _focus={{ bg: 'whiteAlpha.800' }}
-                        _placeholder={{ color: "gray.700" }}
-                    />
-                </InputGroup>
+                        <Input
+                            type={"text"}
+                            placeholder="Search Google Map..."
+                            variant={"filled"}
+                            fontSize={18}
+                            bg={"white"}
+                            color={"gray.700"}
+                            _hover={{ bg: 'whiteAlpha.800' }}
+                            _focus={{ bg: 'whiteAlpha.800' }}
+                            _placeholder={{ color: "gray.700" }}
+                        />
+                    </InputGroup>
                 {/* </Autocomplete> */}
 
                 {/* Choose Rating Button */}
@@ -61,7 +67,7 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
                         ml={4}
                         shadow="lg"
                         cursor={"pointer"}
-                        _hover={{bg:"gray.100"}}
+                        _hover={{ bg: "gray.100" }}
                         transition={'ease-in-out'}
                         transitionDuration={"0.3s"}
                     >
@@ -84,41 +90,89 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
                                 <MenuItem display={"flex"}
                                     alignItems={"center"}
                                     justifyContent="space-around"
-                                    onClick={() => { setRatings("") }}>
+                                    onClick={() => { setRatings(2) }}>
                                     <Text fontSize={20} fontWeight={500}
                                         color={"orange.500"}>
                                         2.0
                                     </Text>
-                                    {/* <Rating size={"small"} value={2} readOnly/> */}
-                                    {/* <Rating name="read-only" value={2} readOnly /> */}
-                                   <div style={{display:"flex", alignItems:"center"}} >
                                     <Rating
-                                        // onClick={handleRating}
-                                        // onPointerEnter={onPointerEnter}
-                                        // onPointerLeave={onPointerLeave}
-                                        // onPointerMove={onPointerMove}
                                         SVGstyle={{ display: 'inline-block' }}
                                         size={25}
                                         initialValue={2}
                                         readonly={true}
-                                        // style={{display:"flex", marginTop:"50%", backgroundColor:"black"}}
-
-                                    /* Available Props */
                                     />
-                                    </div>
                                 </MenuItem>
 
-                                <div>
+                                <MenuItem
+                                    display={"flex"}
+                                    alignItems={"center"}
+                                    justifyContent="space-around"
+                                    onClick={() => setRatings(3)}
+                                >
+                                    <Text fontSize={20} fontWeight={500} color={"orange.500"}>
+                                        3.0
+                                    </Text>
+                                    <Rating
+                                        SVGstyle={{ display: 'inline-block' }}
+                                        size={25}
+                                        initialValue={3}
+                                        readonly={true}
+                                    />
+
+                                </MenuItem>
+
+                                <MenuItem
+                                    display={"flex"}
+                                    alignItems={"center"}
+                                    justifyContent="space-around"
+                                    onClick={() => setRatings(4)}
+                                >
+                                    <Text fontSize={20} fontWeight={500} color={"orange.500"}>
+                                        4.0
+                                    </Text>
+                                    <Rating
+                                        SVGstyle={{ display: 'inline-block' }}
+                                        size={25}
+                                        initialValue={4}
+                                        readonly={true}
+                                    />
+
+                                </MenuItem>
+
+                                <MenuItem
+                                    display={"flex"}
+                                    alignItems={"center"}
+                                    justifyContent="space-around"
+                                    onClick={() => setRatings(4.5)}
+                                >
+                                    <Text fontSize={20} fontWeight={500} color={"orange.500"}>
+                                        4.5
+                                    </Text>
+                                    <Rating
+                                        SVGstyle={{ display: 'inline-block' }}
+                                        size={25}
+                                        initialValue={5}
+                                        readonly={true}
+                                    />
+
+                                </MenuItem>
+
+
+
+
+
+
+
+
+                                {/* <div>
                                     <Rating
                                         onClick={handleRating}
                                         onPointerEnter={onPointerEnter}
                                         onPointerLeave={onPointerLeave}
                                         onPointerMove={onPointerMove}
                                         SVGstyle={{ display: 'inline-block' }}
-
-                                    /* Available Props */
                                     />
-                                </div>
+                                </div> */}
 
                             </MenuList>
                         </Menu>
@@ -137,12 +191,12 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
                     ml={4}
                     shadow="lg"
                     cursor={"pointer"}
-                    _hover={{bg:"gray.100"}}
+                    _hover={{ bg: "gray.100" }}
                     transition={'ease-in-out'}
                     transitionDuration={"0.3s"}
-                    onClick={()=>{setType("restaurants")}}
-                    >
-                    <BiRestaurant fontSize={25}/>
+                    onClick={() => { setType("restaurants") }}
+                >
+                    <BiRestaurant fontSize={25} />
                     <Text ml={3} fontSize={16} fontWeight={500}> Restaurants</Text>
                 </Flex>
 
@@ -157,12 +211,12 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
                     ml={4}
                     shadow="lg"
                     cursor={"pointer"}
-                    _hover={{bg:"gray.100"}}
+                    _hover={{ bg: "gray.100" }}
                     transition={'ease-in-out'}
                     transitionDuration={"0.3s"}
-                    onClick={()=>{setType("hotels")}}
-                    >
-                    <BiHotel fontSize={25}/>
+                    onClick={() => { setType("hotels") }}
+                >
+                    <BiHotel fontSize={25} />
                     <Text ml={3} fontSize={16} fontWeight={500}> Hotels</Text>
                 </Flex>
 
@@ -178,12 +232,12 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
                     ml={4}
                     shadow="lg"
                     cursor={"pointer"}
-                    _hover={{bg:"gray.100"}}
+                    _hover={{ bg: "gray.100" }}
                     transition={'ease-in-out'}
                     transitionDuration={"0.3s"}
-                    onClick={()=>{setType("attractions")}}
-                    >
-                    <BiMapAlt fontSize={25}/>
+                    onClick={() => { setType("attractions") }}
+                >
+                    <BiMapAlt fontSize={25} />
                     <Text ml={3} fontSize={16} fontWeight={500}> Attractions</Text>
                 </Flex>
 
