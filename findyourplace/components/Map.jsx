@@ -10,6 +10,8 @@ import { BiX } from 'react-icons/bi'
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Map = ({setCoordinates, coordinates, setBounds, places}) => {
+  
+ 
   const [isCard, setIsCard] = useState(false);
   const [cardData, setCardData] = useState(null);
 
@@ -39,7 +41,8 @@ const Map = ({setCoordinates, coordinates, setBounds, places}) => {
     <div style={{ height: '100vh', width: '100%' }}>
     {/* <LoadScript googleMapsApiKey='AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk'libraries={["places"]}> */}
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"}}
+        // bootstrapURLKeys={{ key: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"}}
+        // libraries={['places']}
         defaultCenter={coordinates}
         defaultZoom={15}
         center={coordinates}

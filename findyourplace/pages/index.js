@@ -68,7 +68,7 @@ const Home = () => {
     // bg={"blue.400"}
     >
       
-      {/* <Script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"/> */}
+      <Script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"/>
       
 
       <Header setType={setType} setCoordinates={setCoordinates} setRatings={setRatings} />
