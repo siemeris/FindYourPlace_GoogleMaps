@@ -1,16 +1,17 @@
 import React from 'react'
-import { Box, Flex } from '@chakra-ui/react'
-import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
+import { Box, Flex, useMediaQuery } from '@chakra-ui/react'
+import { SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import PlaceDetail from './PlaceDetail'
 
 const List = ({places, isLoading}) => {
+
+  const [isLargerThan550] = useMediaQuery('(min-width: 550px)')
   
   if (isLoading) return (<Flex
     direction={"column"}
-    bg={"whiteAlpha.900"}
-    width={"37vw"}
-    minWidth={320}
-    height="100vh"
+    // bg={"whiteAlpha.900"}
+    width={370}
+    height={isLargerThan550 ? "100vh" : "390px"}
     position={"absolute"}
     left={0}
     top={0}
@@ -18,7 +19,7 @@ const List = ({places, isLoading}) => {
     overflow="hidden"
     px={2}>
 
-    <Box padding='6' boxShadow='lg' bg='white' pt={250}>
+    <Box padding='6' boxShadow='lg' bg='white' mt={265}>
       <SkeletonCircle size='10' />
       <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
     </Box>
@@ -39,10 +40,9 @@ const List = ({places, isLoading}) => {
   return(
     <Flex 
     direction={"column"}
-    bg={"whiteAlpha.900"}
-    width={"37vw"}
-    minWidth={320}
-    height="100vh"
+    // bg={"whiteAlpha.900"}
+    width={isLargerThan550 ? 370 : "full"} 
+    height={isLargerThan550 ? "100vh" : "390px"}
     position={"absolute"}
     left={0}
     top={0}

@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { Flex, Input, InputGroup, InputRightElement, Menu, MenuButton, MenuItem, MenuList, SimpleGrid, Text } from '@chakra-ui/react'
-import { Autocomplete, useLoadScript } from '@react-google-maps/api'
+import { Autocomplete} from '@react-google-maps/api'
 import { BiChevronDown, BiHotel, BiMapAlt, BiRestaurant, BiSearch, BiStar } from "react-icons/bi"
 // import { Rating } from '@mui/material'
 import { Rating } from 'react-simple-star-rating'
-import Script from 'next/script'
-
-const Header = ({ setType, setCoordinates, setRatings }) => {
 
 
-    const { isLoaded, loadError } = useLoadScript({ googleMapsApiKey: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk", libraries: ['places'], });
-    // <Script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"/>
+const Header = ({ setType, setCoordinates, setRatings, isLoaded }) => {
+
+    // const [libraries] = useState(['places']);
+    // const { isLoaded, loadError } = useLoadScript({ googleMapsApiKey: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk", libraries });
+    
     // Para controlar el estado de los filtros
     const [btnColor, setBtnColor] = useState("black")
     const [btnRestaurants, setBtnRestaurants] = useState("green")
@@ -44,7 +44,7 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
  
             <Flex>
                
-                <SimpleGrid minChildWidth='280px' spacingX='5px' spacingY='10px'>
+                <SimpleGrid minChildWidth="330px" spacingX='5px' spacingY='10px'>
                     {/* Choose Rating Button */}
                     <Flex
                         alignItems={"center"}
@@ -151,16 +151,6 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
 
                                     </MenuItem>
 
-                                    {/* <div>
-                                    <Rating
-                                        onClick={handleRating}
-                                        onPointerEnter={onPointerEnter}
-                                        onPointerLeave={onPointerLeave}
-                                        onPointerMove={onPointerMove}
-                                        SVGstyle={{ display: 'inline-block' }}
-                                    />
-                                </div> */}
-
                                 </MenuList>
                             </Menu>
                             <BiChevronDown fontSize={25} />
@@ -232,7 +222,7 @@ const Header = ({ setType, setCoordinates, setRatings }) => {
                     </Flex>
 
                {isLoaded && <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-                 <InputGroup width={"35vw"} height={"fit-content"} shadow="lg">
+                 <InputGroup width={"full"} height={"fit-content"} shadow="lg">
                     <InputRightElement pointerEvents={"none"}
                         children={<BiSearch color="gray" fontSize={20} />} />
 

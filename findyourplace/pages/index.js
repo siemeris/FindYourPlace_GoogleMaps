@@ -1,20 +1,21 @@
-import { Flex } from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import List from "../components/List";
 import Map from "../components/Map";
-import PlaceDetail from "../components/PlaceDetail";
 import { getPlacesData } from "./api/hello";
-import Script from 'next/script'
 
-const places = [
-  {name: "sample place1"},
-  {name: "sample place2"},
-  {name: "sample place3"},
-  {name: "sample place4"},
-  {name: "sample place5"},
-  {name: "sample place6"},
-]
+import styles from '../styles/Home.module.css'
+import { useLoadScript } from "@react-google-maps/api";
+
+// const places = [
+//   {name: "sample place1"},
+//   {name: "sample place2"},
+//   {name: "sample place3"},
+//   {name: "sample place4"},
+//   {name: "sample place5"},
+//   {name: "sample place6"},
+// ]
 
 
 const Home = () => {
@@ -27,6 +28,8 @@ const Home = () => {
   const [type, setType]=useState('restaurants');
   const [ratings, setRatings]=useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [libraries] = useState(['places']);
+  const { isLoaded, loadError } = useLoadScript({ googleMapsApiKey: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk", libraries });
   
 
   useEffect(() => {
@@ -58,23 +61,21 @@ const Home = () => {
   }, [type, coordinates, bounds]);
 
   return (
-    <Flex justifyContent={"center"}
-      alignItems={"center"}
-      width={"100vw"}
-      height={"100vh"}
-      maxWidth={"100vw"}
-      maxHeight={"100vh"}
-      position={"relative"}
+    <Flex 
+    justifyContent={"center"}
+    alignItems={"center"}
+    width={"100vw"}
+    height={"100vh"}
+    maxWidth={"100vw"}
+    maxHeight={"100vh"}
+    position={"relative"}
     // bg={"blue.400"}
     >
       
-      <Script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"/>
-      
-
-      <Header setType={setType} setCoordinates={setCoordinates} setRatings={setRatings} />
+      {/* <Script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key="/> */}
+      <Header setType={setType} setCoordinates={setCoordinates} setRatings={setRatings} isLoaded={isLoaded}/>
       <List places={filteredPlaces.length ? filteredPlaces : places} isLoading={isLoading} />
-      {/* filteredPlaces.length ? filteredPlaces :  */}
-      <Map setCoordinates={setCoordinates} coordinates={coordinates} setBounds={setBounds} places={filteredPlaces.length ? filteredPlaces : places} />
+      <Map isLoaded={isLoaded} setCoordinates={setCoordinates} coordinates={coordinates} setBounds={setBounds} places={filteredPlaces.length ? filteredPlaces : places} />
     </Flex>
   )
 }

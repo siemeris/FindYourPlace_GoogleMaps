@@ -1,17 +1,13 @@
-import { Box, Image, Text } from '@chakra-ui/react'
+import { Box, Image, Text, useMediaQuery } from '@chakra-ui/react'
 import React, { useState } from 'react'
-
 import GoogleMapReact from "google-map-react"
 import { IoLocation } from 'react-icons/io5'
 import { BiX } from 'react-icons/bi'
 
-// import { LoadScript } from "@react-google-maps/api";
 
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-const Map = ({setCoordinates, coordinates, setBounds, places}) => {
+const Map = ({isLoaded, setCoordinates, coordinates, setBounds, places}) => {
   
- 
+  const [isLargerThan550] = useMediaQuery('(min-width: 550px)')
   const [isCard, setIsCard] = useState(false);
   const [cardData, setCardData] = useState(null);
 
@@ -25,7 +21,7 @@ const Map = ({setCoordinates, coordinates, setBounds, places}) => {
     return (
     // <Box width={"100%"} height={"100%"}>
     // <GoogleMapReact
-    //     bootstrapURLKeys={{key: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"}}
+    //     bootstrapURLKeys={{key: ""}}
     //     defaultCenter={coordinates}
     //     center = {coordinates}
     //     defaultZoom = {10}
@@ -37,11 +33,13 @@ const Map = ({setCoordinates, coordinates, setBounds, places}) => {
 
     // </GoogleMapReact>
     // </Box>
-    <Box width={"100%"} height={"100%"}>
-    <div style={{ height: '100vh', width: '100%' }}>
-    {/* <LoadScript googleMapsApiKey='AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk'libraries={["places"]}> */}
+    <Box width={"100%"} 
+    height={isLargerThan550 ? "100%" : "1000px"}
+    >
+    <div style={{ height: '100%', width: '100%' }}>
+    {isLoaded && 
       <GoogleMapReact
-        // bootstrapURLKeys={{ key: "AIzaSyBnF_9F3qIWChIi8rKMxvnBhEX8AQTLyQk"}}
+        // bootstrapURLKeys={{ key: ""}}
         // libraries={['places']}
         defaultCenter={coordinates}
         defaultZoom={15}
@@ -79,7 +77,7 @@ const Map = ({setCoordinates, coordinates, setBounds, places}) => {
             height={"150px"}
             bg={"whiteAlpha.900"}
             position={"absolute"}
-            top={-12}
+            top={isLargerThan550 ? -12 : 51}
             left={0}
             shadow={"lg"}
             rounded={"lg"}
@@ -127,8 +125,8 @@ const Map = ({setCoordinates, coordinates, setBounds, places}) => {
           </Box>
         )}
 
-      </GoogleMapReact>
-      {/* </LoadScript> */}
+      </GoogleMapReact>}
+     
     </div>
     </Box>
   )
