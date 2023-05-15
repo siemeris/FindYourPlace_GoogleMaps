@@ -29,7 +29,7 @@ const Home = () => {
   const [ratings, setRatings]=useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [libraries] = useState(['places']);
-  const { isLoaded, loadError } = useLoadScript({ googleMapsApiKey: "AIzaSyBt9Pngo_T7wBsDUld1GX81xry2YtWqr9E", libraries });
+  const { isLoaded, loadError } = useLoadScript({ googleMapsApiKey: "AIzaSyBnlLeAWVsllBzhNP72_oRml4MpbmQ-NIc", libraries });
   
 
   useEffect(() => {
